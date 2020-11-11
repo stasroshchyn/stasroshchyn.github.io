@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {alphabet} from '../utils';
+
 const Employees = ({data, checkedHandler}) => {
 
     const createSections = () => {
@@ -17,10 +19,11 @@ const Employees = ({data, checkedHandler}) => {
                                     {letterSection.length !== 0 ?
                                         letterSection.map(item => {
                                             return(
-                                                <div className='employees__item'>
+                                                <div className='employees__item' key={item.id}>
                                                     {item.lastName} {item.firstName}
                                                     <input
                                                         type="checkbox"
+                                                        checked={item.checked ? true : false}
                                                         onClick={() => checkedHandler(item)}
                                                     ></input>
                                                 </div>
@@ -36,8 +39,6 @@ const Employees = ({data, checkedHandler}) => {
             </div>
         )
     }
-
-    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
     return(
         <div className='employees'>

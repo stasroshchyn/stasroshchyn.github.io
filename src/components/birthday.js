@@ -1,21 +1,8 @@
 import React from 'react';
 
-const Birthday = ({data}) => {
+import {months} from '../utils';
 
-    const dates = data.filter(item => item.checked === true).sort((a, b) => {
-        const nameA = new Date(Date.parse(a.dob)).getMonth(),
-            nameB = new Date(Date.parse(b.dob)).getMonth();
-        if (nameA < nameB) {
-            return -1;
-        } else if (nameA > nameB) {
-            return 1;
-        } else {
-            return 0;
-        }
-    });
-
-    const months = ["January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"];
+const Birthday = ({checkedData}) => {
 
     const parseDate = (date) => {
         const parsedDate = Date.parse(date),
@@ -33,10 +20,10 @@ const Birthday = ({data}) => {
                 Employees birthday
             </div>
             <div className="birthday__sections">
-                {dates.length === 0 ?
+                {checkedData.length === 0 ?
                     <div>No selected employees</div> :
                     months.map((curVal, index) => {
-                        const monthSection = dates.filter(date => new Date(Date.parse(date.dob)).getMonth() === index);
+                        const monthSection = checkedData.filter(date => new Date(Date.parse(date.dob)).getMonth() === index);
                         return(
                             <>
                                 {monthSection.length !== 0 ? 
@@ -47,7 +34,7 @@ const Birthday = ({data}) => {
                                         <ul className='birthday__items'>
                                             {monthSection.map(item => {
                                                 return(
-                                                    <div className='birthday__item'>
+                                                    <div className='birthday__item' key={item.id}>
                                                         {item.lastName} {item.firstName} - {parseDate(item.dob)}
                                                     </div>
                                                 )
