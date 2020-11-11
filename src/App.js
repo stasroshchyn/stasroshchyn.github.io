@@ -1,24 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import Employees from './components/employees';
+import Birthday from './components/birthday';
+
+import './styles/app.sass';
+
+const App = () => {
+	const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch('https://yalantis-react-school-api.yalantis.com/api/task0/users')
+            .then(data => data.json())
+            .then(data => {
+                data.sort((a, b) => {
+                    const nameA = a.lastName.toLowerCase(),
+                          nameB = b.lastName.toLowerCase();
+                    if (nameA < nameB) {
+                        return -1;
+                    } else if (nameA > nameB) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+                data.map(item => item.checked = false);
+				setData(data);
+			});
+    }, []);
+
+    const checkedHandler = (item) => {
+        const newData = data.map(dataItem => {
+            if (dataItem.id === item.id) {
+                return {...dataItem, checked: !dataItem.checked}
+            } else if (dataItem.checked) {
+                return {...dataItem};
+            } else {
+                return {...dataItem, checked: false};
+            }
+        });
+        setData(newData);
+    }
+
+	return (
+	<div className="App">
+		<Employees
+			data={data}
+			checkedHandler={checkedHandler}
+		/>
+		<Birthday
+            data={data}
+		/>
+	</div>
   );
 }
 
