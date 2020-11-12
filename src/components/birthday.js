@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {months} from '../utils';
+import {months} from '../consts';
 
 const Birthday = ({checkedData}) => {
 
@@ -25,7 +25,7 @@ const Birthday = ({checkedData}) => {
                     months.map((curVal, index) => {
                         const monthSection = checkedData.filter(date => new Date(Date.parse(date.dob)).getMonth() === index);
                         return(
-                            <div key={index}>
+                            <div key={curVal}>
                                 {monthSection.length !== 0 ? 
                                     <div className="birthday__section">
                                         <div className='birthday__month'>

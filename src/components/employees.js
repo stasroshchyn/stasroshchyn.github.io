@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {alphabet} from '../utils';
+import {alphabet} from '../consts';
 
 const Employees = ({data, checkedHandler}) => {
 
@@ -8,10 +8,10 @@ const Employees = ({data, checkedHandler}) => {
         return(
             <div className='employees__sections'>
                 {
-                    alphabet.map((letter, letterIndex) => {
+                    alphabet.map((letter) => {
                         const letterSection = data.filter(item => item.lastName[0] === letter);
                         return(
-                            <div className='employees__section' key={letterIndex}>
+                            <div className='employees__section' key={letter}>
                                 <div className='employees__letter'>
                                     {letter}
                                 </div>
@@ -24,7 +24,7 @@ const Employees = ({data, checkedHandler}) => {
                                                     <input
                                                         type="checkbox"
                                                         checked={item.checked ? true : false}
-                                                        onClick={() => checkedHandler(item)}
+                                                        onChange={() => checkedHandler(item)}
                                                     ></input>
                                                 </div>
                                             )

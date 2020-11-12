@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
-import Employees from './components/employees';
-import Birthday from './components/birthday';
+import Employees from './components/Employees';
+import Birthday from './components/Birthday';
 
 import './styles/app.sass';
 
@@ -25,12 +25,14 @@ const App = () => {
                     }
                 });
 
-                if (JSON.parse(localStorage.getItem('checkedData'))) {
-                    setCheckedData(JSON.parse(localStorage.getItem("checkedData")));
+                const parsedStorageData = JSON.parse(localStorage.getItem('checkedData'));
+
+                if (parsedStorageData) {
+                    setCheckedData(parsedStorageData);
 
                     const newData = data.map(dataItem => {
-                        const indexData = JSON.parse(localStorage.getItem("checkedData")).find(qwe => qwe.id === dataItem.id);
-                        if (indexData !== undefined) {
+                        const indexData = parsedStorageData.find(parsedStorageDataItem => parsedStorageDataItem.id === dataItem.id);
+                        if (indexData) {
                             return {...dataItem, checked: true}
                         } else {
                             return {...dataItem}
