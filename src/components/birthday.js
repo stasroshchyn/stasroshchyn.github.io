@@ -25,7 +25,7 @@ const Birthday = ({checkedData}) => {
                     months.map((curVal, index) => {
                         const monthSection = checkedData.filter(date => new Date(Date.parse(date.dob)).getMonth() === index);
                         return(
-                            <>
+                            <div key={index}>
                                 {monthSection.length !== 0 ? 
                                     <div className="birthday__section">
                                         <div className='birthday__month'>
@@ -43,7 +43,7 @@ const Birthday = ({checkedData}) => {
                                     </div> :
                                     null
                                 }
-                            </>
+                            </div>
                         )
                     })
                 }

@@ -8,10 +8,10 @@ const Employees = ({data, checkedHandler}) => {
         return(
             <div className='employees__sections'>
                 {
-                    alphabet.map(letter => {
+                    alphabet.map((letter, letterIndex) => {
                         const letterSection = data.filter(item => item.lastName[0] === letter);
                         return(
-                            <div className='employees__section'>
+                            <div className='employees__section' key={letterIndex}>
                                 <div className='employees__letter'>
                                     {letter}
                                 </div>
@@ -33,7 +33,7 @@ const Employees = ({data, checkedHandler}) => {
                                     }
                                 </div>
                             </div>
-                        );
+                        )
                     })
                 }
             </div>
