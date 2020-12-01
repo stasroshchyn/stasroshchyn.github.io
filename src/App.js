@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Employees from './components/Employees';
 import Birthday from './components/Birthday';
 
-import './styles/app.sass';
+import './styles/App.sass';
 
 const App = () => {
     const [data, setData] = useState([]);
